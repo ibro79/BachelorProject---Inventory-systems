@@ -1,7 +1,18 @@
-const express = require("express");
+import express from "express";
+import Inventory from "./src/routers/Inventory.js";
+import {connectDB} from "./src/config/db.js";
+import dotenv from "dotenv";
 
-const app = express()
 
-app.listen(5001, () => {
-    console.log("server started on PORT: 5001");
+dotenv.config();
+
+const app = express();
+const PORT = process.env.PORT || 5001;
+connectDB();
+
+app.use("/api/Inventory", Inventory);
+
+
+app.listen(PORT, () => {
+    console.log(`server started on PORT: ${PORT}`);
 });
